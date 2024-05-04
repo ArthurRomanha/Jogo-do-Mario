@@ -31,7 +31,7 @@ const jump = () => {
             clouds.style.animation = 'none';
             clouds.style.right = `${cloudsPosition}px`;
 
-            mario.src = './game-over.png'
+            mario.src = './imagens/game-over.png'
             mario.style.width = '75px'
             mario.style.marginLeft = '50px'
 
