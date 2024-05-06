@@ -1,6 +1,10 @@
-const mario = document.querySelector('.mario')
-const pipe = document.querySelector('.pipe')
-const clouds = document.querySelector('.clouds')
+const mario = document.querySelector('.mario');
+const pipe = document.querySelector('.pipe');
+const clouds = document.querySelector('.clouds');
+const divPontuacao = document.querySelector('.pontuacao');
+let pontuacao = 0
+let melhorPontuacao = 0;
+let loopAddPontosInterrompida = false;
 
 
 const jump = () => {
@@ -15,8 +19,6 @@ const jump = () => {
         const pipePosition = pipe.offsetLeft;
         const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
         const cloudsPosition = clouds.offsetRight;
-
-        console.log(marioPosition);
 
         if(pipePosition<=120 && pipePosition>0 && marioPosition < 80){
 
@@ -35,8 +37,25 @@ const jump = () => {
             mario.style.width = '75px'
             mario.style.marginLeft = '50px'
 
+            loopAddPontosInterrompida = true;
+
             clearInterval(loop);
+            clearTimeout(loopAddPontos)
         }
     },10)
+
+
+    function addPontuacao () {
+        pontuacao++;
+    }
+    function loopPontuacao(){
+        if(!loopAddPontosInterrompida){
+            addPontuacao();
+            divPontuacao.textContent = `${pontuacao}`;
+            setTimeout(loopPontuacao, 250)
+    }
+    }
+    loopPontuacao();
+    
 
 document.addEventListener('keydown', jump);
