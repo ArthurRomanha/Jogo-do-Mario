@@ -2,18 +2,23 @@ const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
 const clouds = document.querySelector('.clouds');
 const divPontuacao = document.querySelector('.pontuacao');
-let pontuacao = 0
+const divMelhorPontuacao = document.querySelector('.melhorPontuacao');
+const btnReiniciar = document.querySelector('.btnReiniciar');
+let pontuacao = 0;
 let melhorPontuacao = 0;
 let loopAddPontosInterrompida = false;
 
+    
+btnReiniciar.style.display = 'none'
 
 const jump = () => {
-    mario.classList.add('jump')
+    mario.classList.add('jump');
 
     setTimeout(() => {
-        mario.classList.remove('jump')
+        mario.classList.remove('jump');
     }, 500);
 }
+btnReiniciar.style.display = "none";
 
     const loop = setInterval(() => {
         const pipePosition = pipe.offsetLeft;
@@ -36,6 +41,8 @@ const jump = () => {
             mario.src = './imagens/game-over.png'
             mario.style.width = '75px'
             mario.style.marginLeft = '50px'
+
+            btnReiniciar.style.display = 'block';
 
             loopAddPontosInterrompida = true;
 
