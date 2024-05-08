@@ -60,6 +60,13 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.resetPipe{
+    bottom: 0;
+    animation: pipe-move 1s linear infinite;
+}
+.resetClouds{
+    animation: paralax 4s linear infinite;
+}
 @keyframes pipe-move{
     from{
         right: -20%;

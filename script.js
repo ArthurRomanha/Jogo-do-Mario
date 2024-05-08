@@ -20,14 +20,15 @@ const jump = () => {
 }
 btnReiniciar.style.display = "none";
 
+
     const loop = setInterval(() => {
+
+        
         const pipePosition = pipe.offsetLeft;
         const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
         const cloudsPosition = clouds.offsetRight;
 
         if(pipePosition<=120 && pipePosition>0 && marioPosition < 80){
-
-
 
             pipe.style.animation = 'none';
             pipe.style.left = `${pipePosition}px`;
@@ -46,8 +47,9 @@ btnReiniciar.style.display = "none";
 
             loopAddPontosInterrompida = true;
 
+
             clearInterval(loop);
-            clearTimeout(loopAddPontos)
+            clearTimeout(loopAddPontos);
         }
     },10)
 
