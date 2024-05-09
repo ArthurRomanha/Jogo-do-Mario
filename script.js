@@ -5,7 +5,7 @@ const divPontuacao = document.querySelector('.pontuacao');
 const divMelhorPontuacao = document.querySelector('.melhorPontuacao');
 const btnReiniciar = document.querySelector('.btnReiniciar');
 let pontuacao = 0;
-let melhorPontuacao = 0;
+let melhorPontuacao = getCookie("melhorPontuacao") || 0;
 let loopAddPontosInterrompida = false;
 
     
@@ -47,6 +47,11 @@ btnReiniciar.style.display = "none";
 
             loopAddPontosInterrompida = true;
 
+            if(pontuacao>melhorPontuacao){
+                melhorPontuacao=pontuacao;
+                divMelhorPontuacao.textContent = `High Score: ${pontuacao}`;
+            }
+
 
             clearInterval(loop);
             clearTimeout(loopAddPontos);
@@ -65,6 +70,33 @@ btnReiniciar.style.display = "none";
     }
     }
     loopPontuacao();
+    
+    function reset(){
+        window.location.reload();
+    }
+    // Função para definir um cookie com o nome, valor e expiração
+    function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    }
+
+    // Função para obter o valor de um cookie pelo nome
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+
     
 
 document.addEventListener('keydown', jump);
