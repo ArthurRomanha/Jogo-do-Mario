@@ -10,7 +10,7 @@ let loopAddPontosInterrompida = false;
     
 btnReiniciar.style.display = 'none'
 
-const jump = () => {
+function jump() {
     mario.classList.add('jump');
 
     setTimeout(() => {
@@ -74,4 +74,4 @@ btnReiniciar.style.display = "none";
         window.location.reload();
     }   
 
-document.addEventListener('keydown', jump);
+document.addEventListener('keydown', jump());
