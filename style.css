@@ -54,9 +54,12 @@
     animation: jump 500ms ease-out;
 }
 .btnReiniciar{
-    background-color: gray;
+    background-color: #6b6b6b;
+    color: white;
+    font-size: 30px;
     border-radius: 5px;
     border: 1px solid black;
+    padding: 5px 20px;
     position: absolute;
     top: 50%;
     left: 50%;
