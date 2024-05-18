@@ -25,6 +25,7 @@
     right: 0;
     top: 0;
     width: 40%;
+    z-index: 9;
 }
 .pontuacao .melhorPontuacao{
     display: inline;
@@ -46,7 +47,8 @@
 .clouds{
     position: absolute;
     width:550px;
-    animation: paralax 4s linear infinite;
+    animation: paralax 20s linear infinite;
+    z-index: 1;
 }
 .jump{
     animation: jump 500ms ease-out;

@@ -10,6 +10,20 @@ let loopAddPontosInterrompida = false;
     
 btnReiniciar.style.display = 'none'
 
+function checkStorage() {
+    var pontuacaoLocal = localStorage.getItem("highscore");
+    if (pontuacaoLocal=="" || pontuacaoLocal==null)
+    {
+    localStorage.setItem("highscore", 0);
+    }
+    else if (pontuacaoLocal!="" && pontuacaoLocal!=null)
+    {
+    // localStorage.setItem("highscore", melhorPontuacao);
+    melhorPontuacao = pontuacaoLocal;
+    divMelhorPontuacao.textContent = `High Score: ${melhorPontuacao}`;
+    }
+    }
+
 function jump() {
     mario.classList.add('jump');
 
@@ -48,6 +62,7 @@ btnReiniciar.style.display = "none";
 
             if(pontuacao>melhorPontuacao){
                 melhorPontuacao=pontuacao;
+                pontuacaoLocal = localStorage.setItem('highscore', melhorPontuacao)
                 divMelhorPontuacao.textContent = `High Score: ${pontuacao}`;
             }
 
@@ -56,7 +71,6 @@ btnReiniciar.style.display = "none";
             clearTimeout(loopPontuacao);
         }
     },10)
-
 
     function addPontuacao () {
         pontuacao++;
@@ -74,4 +88,8 @@ btnReiniciar.style.display = "none";
         window.location.reload();
     }   
 
-document.addEventListener('keydown', jump());
+    document.addEventListener('keydown', function(tecla){
+        if(tecla.keyCode ==32){
+            jump();
+        }
+    });
