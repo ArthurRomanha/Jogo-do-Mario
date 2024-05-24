@@ -4,25 +4,28 @@ const clouds = document.querySelector('.clouds');
 const divPontuacao = document.querySelector('.pontuacao');
 const divMelhorPontuacao = document.querySelector('.melhorPontuacao');
 const btnReiniciar = document.querySelector('.btnReiniciar');
+const btnComecar = document.querySelector('.btnComecar');
 let pontuacao = 0;
 let melhorPontuacao = 0;
 let loopAddPontosInterrompida = false;
-    
-btnReiniciar.style.display = 'none'
+
+
+pipe.classList.remove('pipeAnimation');
+btnReiniciar.style.display = 'none';
+
+clouds.classList.add('cloudsAnimation');
 
 function checkStorage() {
     var pontuacaoLocal = localStorage.getItem("highscore");
-    if (pontuacaoLocal=="" || pontuacaoLocal==null)
-    {
-    localStorage.setItem("highscore", 0);
+    if (pontuacaoLocal == "" || pontuacaoLocal == null) {
+        localStorage.setItem("highscore", 0);
     }
-    else if (pontuacaoLocal!="" && pontuacaoLocal!=null)
-    {
-    // localStorage.setItem("highscore", melhorPontuacao);
-    melhorPontuacao = pontuacaoLocal;
-    divMelhorPontuacao.textContent = `High Score: ${melhorPontuacao}`;
+    else if (pontuacaoLocal != "" && pontuacaoLocal != null) {
+        // localStorage.setItem("highscore", melhorPontuacao);
+        melhorPontuacao = pontuacaoLocal;
+        divMelhorPontuacao.textContent = `High Score: ${melhorPontuacao}`;
     }
-    }
+}
 
 function jump() {
     mario.classList.add('jump');
@@ -34,14 +37,20 @@ function jump() {
 btnReiniciar.style.display = "none";
 
 
+function jogo() {
+    loopPontuacao();
     const loop = setInterval(() => {
 
-        
         const pipePosition = pipe.offsetLeft;
         const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
         const cloudsPosition = clouds.offsetRight;
 
-        if(pipePosition<=120 && pipePosition>0 && marioPosition < 80){
+
+        pipe.classList.add('pipeAnimation');
+        btnComecar.style.display = 'none';
+
+
+        if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
 
             pipe.style.animation = 'none';
             pipe.style.left = `${pipePosition}px`;
@@ -60,8 +69,8 @@ btnReiniciar.style.display = "none";
 
             loopAddPontosInterrompida = true;
 
-            if(pontuacao>melhorPontuacao){
-                melhorPontuacao=pontuacao;
+            if (pontuacao > melhorPontuacao) {
+                melhorPontuacao = pontuacao;
                 pontuacaoLocal = localStorage.setItem('highscore', melhorPontuacao)
                 divMelhorPontuacao.textContent = `High Score: ${pontuacao}`;
             }
@@ -69,27 +78,29 @@ btnReiniciar.style.display = "none";
 
             clearInterval(loop);
             clearTimeout(loopPontuacao);
+            
+            
         }
-    },10)
+    }, 10)
+}
 
-    function addPontuacao () {
-        pontuacao++;
+function addPontuacao() {
+    pontuacao++;
+}
+function loopPontuacao() {
+    if (!loopAddPontosInterrompida) {
+        addPontuacao();
+        divPontuacao.textContent = `${pontuacao}`;
+        setTimeout(loopPontuacao, 250)
     }
-    function loopPontuacao(){
-        if(!loopAddPontosInterrompida){
-            addPontuacao();
-            divPontuacao.textContent = `${pontuacao}`;
-            setTimeout(loopPontuacao, 250)
-    }
-    }
-    loopPontuacao();
-    
-    function reset(){
-        window.location.reload();
-    }   
+}
 
-    document.addEventListener('keydown', function(tecla){
-        if(tecla.keyCode ==32){
-            jump();
-        }
-    });
+function reset() {
+    window.location.reload();
+}
+
+document.addEventListener('keydown', function (tecla) {
+    if (tecla.keyCode == 32) {
+        jump();
+    }
+});
