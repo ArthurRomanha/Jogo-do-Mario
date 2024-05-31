@@ -39,8 +39,17 @@
     width: 80px;
     right: 200px;
 }
+.blueShell{
+    position: absolute;
+    bottom: 120px;
+    width: 120px;
+    right: 300px;
+}
+.blueShellAnimation{
+    animation: direita-esquerda 1.2s linear infinite;
+}
 .pipeAnimation{
-    animation: pipe-move 1s linear infinite;
+    animation: direita-esquerda 1s linear infinite;
 }
 .mario{
     position: absolute;
@@ -73,12 +82,12 @@ button{
 }
 .resetPipe{
     bottom: 0;
-    animation: pipe-move 1s linear infinite;
+    animation: direita-esquerda 1s linear infinite;
 }
 .resetClouds{
     animation: paralax 4s linear infinite;
 }
-@keyframes pipe-move{
+@keyframes direita-esquerda{
     from{
         right: -20%;
     }
